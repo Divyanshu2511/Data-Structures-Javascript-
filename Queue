@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<body>
+    <script>
+
+
+class Queue {
+    constructor() {
+        this.item = [],
+        this.count = 0,
+        this.back = 0
+    }
+
+    
+        enqueue(element) {
+        this.item[this.count] = element;
+        console.log(`${element} added to Queue`);
+        this.count++;
+        
+    }
+
+    
+      dequeue() {
+        if(this.count == 0)
+        { 
+            return undefined;
+        }
+      
+        let delete1 = this.item[this.back];
+        this.back++;
+        console.log(`${delete1} removed`)
+        
+    }
+
+    
+    top() {
+        console.log(`Top Queue element is ${this.item[0]}`)
+       
+    }
+
+   
+    CheckisEmpty() {
+        console.log(this.count == 0 ? 'Queue is empty' : 'Queue is NOT empty')
+        
+    }
+
+    
+    size() {
+        console.log(`${this.count} elements in Queue`)
+       
+    }
+
+   
+    print() {
+        let arr = ''
+        for(let i = this.back; i < this.count; i++) {
+            arr += this.item[i] + ' '
+        }
+        return arr
+    }
+
+    
+    clear() {
+        this.item = []
+        this.count = 0,
+        this.back = 0
+        console.log('Queue cleared..')
+       
+    }
+}
+
+var queue = new Queue();
+
+
+
+
+    </script>
+</body>
