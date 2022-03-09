@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<body>
+<script>
+      
+class Node{
+constructor(data , next=null ,pre=null){
+    this.data =data,
+    this.next =next;
+    this.pre = pre;
+}
+}
+
+class CircularLinkedList{
+    constructor(data){
+        this.head ={
+            data:data,
+            next:null,
+            pre :null
+        },
+    this.size = 0; 
+    this.tail =this.head; 
+    }
+
+
+
+insertAtFirst(data) {
+     if(this.size == 0){
+        var addNode = new Node(data);
+    this.head =addNode;
+    this.tail =addNode;
+
+     }
+     if(this.size != 0){
+ var addNode = new Node(data ,this.head,this.tail);
+     this.head.pre = addNode;
+    this.tail.next=addNode;
+    this.head =addNode;
+     }
+ this.size++
+    return addNode;
+}
+
+
+
+append(data){
+ 
+    if(this.size !=0 ){
+        var addNode = new Node(data,this.head);
+    this.tail.next = addNode;
+     addNode.pre =this.tail;
+     this.tail = addNode;
+     this.head.pre =addNode;
+    }
+    if(this.size == 0 ){
+        var addNode = new Node(data);
+      this.head =addNode;
+      this.tail=addNode;
+      
+    }
+ this.size++;
+    return addNode;
+}
+    
+
+// This Insert 0 based indexing order .
+insertatIndex(data, index){
+    if(index <0 || index > this.size || this.size == 0){
+        console.log('Please use append for Adding Elements to List')
+        return;
+    }
+    if(index == 0 ){  
+     var addNode = new Node(data,this.head , this.tail);
+       this.head.pre= addNode,
+      //addNode.next =this.head,
+      this.head = addNode;
+      this.size++ ;
+      return;
+    }
+    
+    var addNode = new Node(data)
+    let current , previous;
+    current =this.head;
+    let count =0;
+
+    while(count <index){
+        previous = current;
+        count++;
+        current =current.next;
+        }
+        previous.next = addNode;
+        addNode.pre = previous ;
+        addNode.next = current;
+        current.pre = addNode;
+        this.size++;
+    }
+
+getIndexValue(index){
+    let current = this.head;
+    let count = 0;
+    while (current) {
+      if (count == index) {
+        console.log(current.data);
+      }
+      count++;
+      current = current.next;
+    }
+    return null;
+  }
+
+
+
+// This Removes 0 based indexing order .
+removeAtIndex(index) {
+    if (index < 0 && index > this.size-1) {
+      return;
+    }
+    let current = this.head;
+    let previous;
+    let count = 0;
+    if (index == 0) {
+      this.head = current.next;
+      this.head.pre=this.tail;
+      this.tail.next = this.head;
+      this.size -= 1;
+    }
+    else if ( index == this.size-1) {
+        console.log('hy');
+        while (count < index) {
+        count++;
+        previous = current;
+        current = current.next;
+      }
+      this.tail = previous;
+      this.head.pre=this.tail;
+      previous.next =this.head;
+      this.size -= 1;
+    }
+
+    else {
+      while (count < index) {
+        count++;
+        previous = current;
+        current = current.next;
+      }
+
+      previous.next=  current.next;
+      current.next.pre =current.pre;
+      this.size -= 1;
+    }
+
+   
+  }
+
+  deleteList() {
+    this.head = null;
+    this.tail =null;
+    this.size = 0;
+  }
+
+print(){
+    let current = this.head;
+    let last = this.tail;
+    
+    while(current.pre != last.pre){
+        console.log(current.data);
+        current = current.next;
+        
+    }
+    console.log(last.data);
+}
+      
+}
+
+const myList = new CircularLinkedList();
+
+
+</script>
+</body>
+</html>
